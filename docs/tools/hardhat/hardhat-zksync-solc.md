@@ -111,6 +111,12 @@ For Solidity versions older than 0.8, only this compilation mode is available an
 
 :::
 
+::: warning `fallbackOz` usage
+
+`fallbackOz` option is supported for zksolc compiler version 1.3.21 or higher.`,
+
+:::
+
 ### Network configuration
 
 Configure the `zksync` parameter in the networks to enable the zksolc compiler:
