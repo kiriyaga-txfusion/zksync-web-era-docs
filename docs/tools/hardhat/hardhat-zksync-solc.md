@@ -62,6 +62,7 @@ zksolc: {
       compilerPath: "zksolc",  // optional. Ignored for compilerSource "docker". Can be used if compiler is located in a specific folder
       libraries:{}, // optional. References to non-inlinable libraries
       missingLibrariesPath: "./.zksolc-libraries-cache/missingLibraryDependencies.json" // optional. This path serves as a cache that stores all the libraries that are missing or have dependencies on other libraries. A `hardhat-zksync-deploy` plugin uses this cache later to compile and deploy the libraries, especially when the `deploy-zksync:libraries` task is executed
+      fallbackOz: false, // optional. Try to recompile with -Oz if the bytecode is too large
       isSystem: false, // optional.  Enables Yul instructions available only for zkSync system contracts and libraries
       forceEvmla: false, // optional. Falls back to EVM legacy assembly if there is a bug with Yul
       optimizer: {
@@ -88,6 +89,7 @@ zksolc: {
 - `compilerPath` (optional) is a field with the path to the `zksolc` binary. By default, the binary in `$PATH` is used.
 - `libraries` if your contract uses non-inlinable libraries as dependencies, they have to be defined here. Learn more about [compiling libraries here](./compiling-libraries.md)
 - `missingLibrariesPath` (optional) serves as a cache that stores all the libraries that are missing or have dependencies on other libraries. A `hardhat-zksync-deploy` plugin uses this cache later to compile and deploy the libraries, especially when the `deploy-zksync:libraries` task is executed. Defaults to `./.zksolc-libraries-cache/missingLibraryDependencies.json`.
+- `fallbackOz` (optional) indicates that the compiler will try to recompile with `-Oz` if the bytecode is too large.
 - `isSystem` - required if contracts use enables Yul instructions available only for zkSync system contracts and libraries
 - `forceEvmla` - falls back to EVM legacy assembly if there is an issue with the Yul IR compilation pipeline.
 - `optimizer` - Compiler optimizations:
