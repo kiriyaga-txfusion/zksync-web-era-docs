@@ -744,7 +744,7 @@ Please consider that while the provided commands enable contract deployment and 
 
 ## Configuration
 
-To extend the configuration to support commands, we need to add an accounts field to the specific network configuration in the networks section of the hardhat.config.ts file. This accounts field can support an array of private keys or a mnemonic object and represents accounts that will be used as wallet automaticlly.
+To extend the configuration to support commands, we need to add an accounts field to the specific network configuration in the networks section of the hardhat.config.ts file. This accounts field can support an array of private keys or a mnemonic object and represents accounts that will be used as wallet automatically.
 
 ```typescript
 const config: HardhatUserConfig = {
@@ -756,10 +756,10 @@ const config: HardhatUserConfig = {
       url: "https://sepolia.era.zksync.dev", // The testnet RPC URL of zkSync Era network.
       ethNetwork: "sepolia", // The Ethereum Web3 RPC URL, or the identifier of the network (e.g. `mainnet` or `sepolia`)
       zksync: true,
-      // ADDITON
-      // The private keys for the accounts used in the deployment or in the upgradation process.
+      // ADDITION
+      // The private keys for the accounts used in the deployment or in the upgrade process.
       accounts: ["0xac1e735be8536c6534bb4f17f06f6afc73b2b5ba84ac2cfb12f7461b20c0bbe3", "0x28a574ab2de8a00364d5dd4b07c4f2f574ef7fcc2a86a197f65abaec836d1959"],
-      // Mnemonic used in the deployment or in the upgradation process
+      // Mnemonic used in the deployment or in the upgrade process
       // accounts: {
       //     mnemonic: 'stuff slice staff easily soup parent arm payment cotton trade scatter struggle'
       // }
@@ -768,13 +768,13 @@ const config: HardhatUserConfig = {
 };
 ```
 
-- accounts represents a list of the private keys or mnemonic object for the account used in the deployment or in the upgradation process.
-  accounts object will be automaticly be populated with rich accounts if used network is zkSync Era Test Node or zksync-cli Local Node
+- accounts represents a list of the private keys or mnemonic object for the account used in the deployment or in the upgrade process.
+  accounts object will be automatically be populated with rich accounts if used network is zkSync Era Test Node or zksync-cli Local Node
   To establish a default index per network, which is by default `0`, you can include a `deployerAccounts` section in your `hardhat.config.ts` file.
 
 ```typescript
 const config: HardhatUserConfig = {
-  // ADDITON
+  // ADDITION
   deployerAccounts: {
     zkTestnet: 1, // The default index of the account for the specified network.
     //default: 0 // The default value for not specified networks. Automatically set by plugin to the index 0.
