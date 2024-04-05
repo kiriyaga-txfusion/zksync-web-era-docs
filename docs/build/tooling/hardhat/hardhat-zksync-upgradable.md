@@ -744,7 +744,7 @@ Please consider that while the provided commands enable contract deployment and 
 
 ## Configuration
 
-To extend the configuration to support commands, we need to add an accounts field to the specific network configuration in the networks section of the hardhat.config.ts file. This accounts field can support an array of private keys or a mnemonic object and represents accounts that will be used as wallet automatically.
+To extend the configuration to support commands, we need to add an accounts field to the specific network configuration in the networks section of the `hardhat.config.ts` file. This accounts field can support an array of private keys or a mnemonic object and represents accounts that will be used as wallet automatically.
 
 ```typescript
 const config: HardhatUserConfig = {
