@@ -547,7 +547,7 @@ For more details about a dockerized local setup, check out [Local testing](../..
 
 `yarn hardhat deploy-zksync:contract --contract-name <contract name or FQN>`
 
-Provides an easy and fast way to dthe deployment of the given contract on the designated network. If the provided command for deploying a single contract is insufficient and you require additional flexibility, such as incorporating additional dependencies or overrides, it would be advisable to utilize a script-based approach.
+Provides an easy and fast way to deploy the given contract on the specified network. If the provided command for deploying a single contract is insufficient and you require additional flexibility, such as incorporating additional dependencies or overrides, it would be advisable to utilize a script-based approach.
 
 - `--contract-name <contract name or FQN>` - contract name or FQN, required argument in all tasks, e.g. `hardhat deploy-zksync:proxy --contract-name SomeContract`.
 - `<constructor arguments>` - list of constructor arguments, e.g. `hardhat deploy-zksync:proxy --contract-name Greeter 'Hello'`.
