@@ -805,21 +805,19 @@ const config: HardhatUserConfig = {
 
 `yarn hardhat deploy-zksync:proxy --contract-name <contract name or FQN> [<constructor arguments>] [--constructor-args <javascript module name>] [--deployment-type <deployment type>] [--initializer <initialize method>] [--no-compile]`
 
-When executed, this command will automatically determine whether the deployment is for a Transparent or UUPS proxy.
-If the Transparent proxy is chosen, it will deploy implementation, admin, and proxy.
-If the UUPS proxy is chosen, it will deploy implementation and proxy.
+Automatically determine whether the deployment requires a Transparent or UUPS proxy, and deploy all necessary contracts accordingly. If the Transparent proxy is chosen, the deployment will include the implementation, admin, and proxy. Alternatively, selecting the UUPS proxy will result in deploying the implementation and proxy.
 
 `yarn hardhat upgrade-zksync:proxy --contract-name <contract name or FQN> --proxy-address <proxy address> [--deployment-type <deployment type>] [--no-compile]`
 
-When executed, this command upgrade UUPS or Transparent implementation.
+Upgrade UUPS or Transparent implementation on the specified network.
 
 `yarn hardhat deploy-zksync:beacon --contract-name <contract name or FQN> [<constructor arguments>] [--constructor-args <javascript module name>] [--deployment-type <deployment type>] [--initializer <initialize method>] [--no-compile]`
 
-When executed, this command deploys the provided implementation, beacon and proxy on the specified network, using the provided contract constructor arguments.
+Initiates the deployment of the specified implementation, beacon, and proxy on the specified network.
 
 `yarn hardhat upgrade-zksync:beacon --contract-name <contract name or FQN> --beacon-address <beacon address> [--deployment-type <deployment type>] [--no-compile]`
 
-When executed, this command upgrade beacon implementation.
+Upgrade beacon implementation on the specified network.
 
 - `--contract-name <contract name or FQN>` - contract name or FQN, required argument in all tasks, e.g. `hardhat deploy-zksync:proxy --contract-name SomeContract`.
 - `<constructor arguments>` - list of constructor arguments, e.g. `hardhat deploy-zksync:proxy --contract-name Greeter 'Hello'`.
