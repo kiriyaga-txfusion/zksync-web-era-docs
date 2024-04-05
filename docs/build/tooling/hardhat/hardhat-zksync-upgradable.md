@@ -784,7 +784,7 @@ const config: HardhatUserConfig = {
     sepolia: {
       url: "https://sepolia.infura.io/v3/<API_KEY>", // The Ethereum Web3 RPC URL (optional).
     },
-    zkTestnet: {
+    zkSyncSepoliaTestnet: {
       url: "https://sepolia.era.zksync.dev", // The testnet RPC URL of zkSync Era network.
       ethNetwork: "sepolia", // The Ethereum Web3 RPC URL, or the identifier of the network (e.g. `mainnet` or `sepolia`)
       zksync: true,
