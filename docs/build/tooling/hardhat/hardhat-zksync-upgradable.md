@@ -813,8 +813,6 @@ If the UUPS proxy is chosen, it will deploy implementation and proxy.
 
 When executed, this command upgrade UUPS or Transparent implementation.
 
-- `--proxy-address <proxy address>` - deployed proxy address, e.g. `yarn hardhat upgrade-zksync:proxy --contract-name BoxV2 --proxy-address 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520`.
-
 `yarn hardhat deploy-zksync:beacon --contract-name <contract name or FQN> [<constructor arguments>] [--constructor-args <javascript module name>] [--deployment-type <deployment type>] [--initializer <initialize method>] [--no-compile]`
 
 When executed, this command deploys the provided implementation, beacon and proxy on the specified network, using the provided contract constructor arguments.
@@ -823,12 +821,9 @@ When executed, this command deploys the provided implementation, beacon and prox
 
 When executed, this command upgrade beacon implementation.
 
-- `--beacon-address <beacon address>` - deployed beacon address, e.g. `yarn hardhat upgrade-zksync:beacon --contract-name BoxV2 --beacon-address 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520`.
-
 - `--contract-name <contract name or FQN>` - contract name or FQN, required argument in all tasks, e.g. `hardhat deploy-zksync:proxy --contract-name SomeContract`.
 - `<constructor arguments>` - list of constructor arguments, e.g. `hardhat deploy-zksync:proxy --contract-name Greeter 'Hello'`.
-- `--constructor-args <module name>` - name of javascript module containing complex constructor arguments, e.g.
-  `hardhat deploy-zksync:contract --contract-name ComplexContract --constructor-args args.js`. Example of `args.js` :
+- `--constructor-args <module name>` - name of javascript module containing complex constructor arguments. Works only if `<constructor arguments>` are not provided, e.g. `hardhat deploy-zksync:contract --contract-name ComplexContract --constructor-args args.js`. Example of `args.js` :
 
 ```typescript
 module.exports = [
@@ -842,6 +837,8 @@ module.exports = [
 ];
 ```
 
+- `--beacon-address <beacon address>` - deployed beacon contract address, e.g. `yarn hardhat upgrade-zksync:beacon --contract-name BoxV2 --beacon-address 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520`.
+- `--proxy-address <proxy address>` - deployed proxy contract address, e.g. `yarn hardhat upgrade-zksync:proxy --contract-name BoxV2 --proxy-address 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520`.
 - `--initializer <initializer method>` - initializer method name present in the contract, e.g. `hardhat deploy-zksync:proxy --contract-name Contract --initializer store`. If this parameter is omitted, the default value will be `initialize`.
 - `--no-compile`- skip the compilation process, e.g. `hardhat deploy-zksync:beacon --contract-name Contract --no-compile`.
 - `--deployment-type` - specify which deployer smart contract function will be called. Permissible values for this parameter include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --deployment-type create2`.
