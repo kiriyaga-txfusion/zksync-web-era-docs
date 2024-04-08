@@ -13,7 +13,7 @@ List of contained plugins:
 
 - [hardhat-zksync-solc](./hardhat-zksync-solc.md)
 - [hardhat-zksync-deploy](./hardhat-zksync-deploy.md)
-- [hardhat-zksync-upgrdable](./hardhat-zksync-upgradable.md)
+- [hardhat-zksync-upgradable](./hardhat-zksync-upgradable.md)
 - [hardhat-zksync-verify](./hardhat-zksync-verify.md)
 - [hardhat-zksync-node](./hardhat-zksync-node.md)
 - [hardhat-zksync-ethers](./hardhat-zksync-ethers.md)
