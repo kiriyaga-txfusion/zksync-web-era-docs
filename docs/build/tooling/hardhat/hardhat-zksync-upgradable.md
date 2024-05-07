@@ -212,6 +212,28 @@ npx hardhat run SCRIPT_FILE
 - This provider is configured in the hardhat config file, by stating the RPC url of the network to connect to.
   :::
 
+  In the options section, include the following arguments to configure the deployment of the proxy and implementation with different deployment types and salts:
+
+- `deploymentTypeImpl`
+- `saltImpl`
+- `deploymentTypeProxy`
+- `saltProxy`
+
+```
+ const box = await hre.zkUpgrades.deployProxy(deployer.zkWallet, contract, [42],
+  { initializer: "initialize",
+    saltImpl: "0x4273795673417857416686492163276941983664248508133571812215241323",
+    deploymentTypeImpl: "create2",
+    saltProxy: "0x5273795673417857416686492163276941983664248508133571812215241323",
+    deploymentTypeProxy: "create2"
+  }
+);
+```
+
+:::note
+Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+:::
+
 ### Openzeppelin Version
 
 The plugin does not work with the latest versions due to a blocker on the `@matterlab/zksync-contracts` package.The solution is to change the development dependencies to the previous version in your `package.json`.
@@ -412,6 +434,26 @@ npx hardhat run SCRIPT_FILE
 
 :::
 
+In the options section, include the `deploymentType` and `salt` arguments to configure deployment type and salt.
+
+```
+const beacon = await hre.zkUpgrades.deployBeacon(deployer.zkWallet, boxContract, {
+  deploymentType: 'create2',
+  salt: '0x5273795673417857416686492163276941983664248508133571812215241323'
+});
+await beacon.waitForDeployment();
+
+const box = await hre.zkUpgrades.deployBeaconProxy(deployer.zkWallet, beacon, boxContract, [42], {
+  deploymentType: 'create2',
+  salt: '0x6273795673417857416686492163276941983664248508133571812215241323'
+});
+await box.waitForDeployment();
+```
+
+:::note
+Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+:::
+
 ## Implementation addresses check
 
 Once you deploy the proxy contract, all interactions with your implementation contract go through it.
@@ -498,11 +540,22 @@ To upgrade the implementation of the transparent upgradeable contract, use the `
   await hre.zkUpgrades.upgradeProxy(deployer.zkWallet, <PROXY_ADDRESS>, BoxV2);
 ```
 
-`upgradeProxy` receives 3 arguments:
+`upgradeProxy` receives 4 arguments:
 
 - A zkSync Era wallet.
 - The address of the previously deployed box proxy.
 - The artifact containing the new `Box2` implementation.
+- Other options
+
+In the options section, include the `deploymentType` and `salt` to configure deployment type and salt.
+
+```
+const myContractV2 = await deployer.loadArtifact('BoxV2');
+await hre.zkUpgrades.upgradeProxy(deployer.zkWallet, <PROXY_ADDRESS>, BoxV2, {
+ deploymentType: 'create2',
+ salt: '0x6273795673417857416686492163276941983664248508133571812215241323'
+});
+```
 
 ## Upgrade UUPS proxy
 
@@ -647,6 +700,16 @@ npx hardhat run SCRIPT_FILE
 ```
 
 :::
+
+In the options section, include the `deploymentType` and `salt` to configure deployment type and salt.
+
+```
+const myContractV2 = await deployer.loadArtifact('contractV2');
+await hre.zkUpgrades.upgradeBeacon(deployer.zkWallet, <BEACON_PROXY_ADDRESS>, myContractV2 {
+ deploymentType: 'create2',
+ salt: '0x6273795673417857416686492163276941983664248508133571812215241323'
+});
+```
 
 # Proxy verification
 
@@ -803,19 +866,19 @@ const config: HardhatUserConfig = {
 
 ## Command list
 
-`yarn hardhat deploy-zksync:proxy --contract-name <contract name or FQN> [<constructor arguments>] [--constructor-args <javascript module name>] [--deployment-type <deployment type>] [--initializer <initialize method>] [--no-compile]`
+`yarn hardhat deploy-zksync:proxy --contract-name <contract name or FQN> [<constructor arguments>] [--constructor-args <javascript module name>] [--initializer <initialize method>] [--deployment-type-impl <deployment type>] [--salt-impl <salt>] [--deployment-type-proxy <deployment type>] [--salt-proxy <salt>] [--no-compile]`
 
 Automatically determine whether the deployment requires a Transparent or UUPS proxy, and deploy all necessary contracts accordingly. If the Transparent proxy is chosen, the deployment will include the implementation, admin, and proxy. Alternatively, selecting the UUPS proxy will result in deploying the implementation and proxy.
 
-`yarn hardhat upgrade-zksync:proxy --contract-name <contract name or FQN> --proxy-address <proxy address> [--deployment-type <deployment type>] [--no-compile]`
+`yarn hardhat upgrade-zksync:proxy --contract-name <contract name or FQN> --proxy-address <proxy address> [--deployment-type <deployment type>] [--salt <salt>] [--no-compile]`
 
 Upgrade UUPS or Transparent implementation on the specified network.
 
-`yarn hardhat deploy-zksync:beacon --contract-name <contract name or FQN> [<constructor arguments>] [--constructor-args <javascript module name>] [--deployment-type <deployment type>] [--initializer <initialize method>] [--no-compile]`
+`yarn hardhat deploy-zksync:beacon --contract-name <contract name or FQN> [<constructor arguments>] [--constructor-args <javascript module name>] [--initializer <initialize method>] [--deployment-type-impl <deployment type>] [--salt-impl <salt>] [--deployment-type-proxy <deployment type>] [--salt-proxy <salt>] [--no-compile]`
 
 Initiates the deployment of the specified implementation, beacon, and proxy on the specified network.
 
-`yarn hardhat upgrade-zksync:beacon --contract-name <contract name or FQN> --beacon-address <beacon address> [--deployment-type <deployment type>] [--no-compile]`
+`yarn hardhat upgrade-zksync:beacon --contract-name <contract name or FQN> --beacon-address <beacon address> [--deployment-type <deployment type>] [--salt <salt>] [--no-compile]`
 
 Upgrade beacon implementation on the specified network.
 
@@ -839,6 +902,12 @@ module.exports = [
 - `--proxy-address <proxy address>` - deployed proxy contract address, e.g. `yarn hardhat upgrade-zksync:proxy --contract-name BoxV2 --proxy-address 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520`.
 - `--initializer <initializer method>` - initializer method name present in the contract, e.g. `hardhat deploy-zksync:proxy --contract-name Contract --initializer store`. If this parameter is omitted, the default value will be `initialize`.
 - `--no-compile`- skip the compilation process, e.g. `hardhat deploy-zksync:beacon --contract-name Contract --no-compile`.
-- `--deployment-type` - specify which deployer smart contract function will be called. Permissible values for this parameter include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --deployment-type create2`.
+- `--deployment-type-proxy` - specify which deployer smart contract function will be called for proxy, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --deployment-type-proxy create2`.
+- `--deployment-type-impl` - specify which deployer smart contract function will be called for implementation, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --deployment-type-impl create2`.
+- `--salt-proxy` - specify which salt will be used in deployment of the proxy, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --salt-proxy 0x42737956734178574166864921632769419836642485081335718122152413290`.
+- `--salt-impl` - specify which salt will be used in deployment of the implementation, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --salt-impl 0x42737956734178574166864921632769419836642485081335718122152413290`.
+- When utilizing the `upgrade-zksync:beacon` or `upgrade-zksync:proxy` tasks, specify the deployment type and salt using the `--deployment-type` and `--salt` arguments respectively.
+
+Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
 
 The account used for deployment will be the one specified by the `deployerAccount` configuration within the `hardhat.config.ts` file. If no such configuration is present, the account with index `0` will be used.
