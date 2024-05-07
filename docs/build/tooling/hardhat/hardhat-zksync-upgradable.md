@@ -212,7 +212,7 @@ npx hardhat run SCRIPT_FILE
 - This provider is configured in the hardhat config file, by stating the RPC url of the network to connect to.
   :::
 
-  In the options section, include the following arguments to configure the deployment of the proxy and implementation with different deployment types and salts:
+Additionaly, in the options section optionaly include the folowing arguments to configure the deployment of the proxy and implementation with different deployment types and salts:
 
 - `deploymentTypeImpl`
 - `saltImpl`
@@ -232,6 +232,7 @@ npx hardhat run SCRIPT_FILE
 
 :::note
 Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`
 :::
 
 ### Openzeppelin Version
@@ -434,7 +435,7 @@ npx hardhat run SCRIPT_FILE
 
 :::
 
-In the options section, include the `deploymentType` and `salt` arguments to configure deployment type and salt.
+Additionaly, in the options section optionaly include the `deploymentType` and `salt` arguments to configure deployment type and salt.
 
 ```
 const beacon = await hre.zkUpgrades.deployBeacon(deployer.zkWallet, boxContract, {
@@ -452,6 +453,7 @@ await box.waitForDeployment();
 
 :::note
 Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`
 :::
 
 ## Implementation addresses check
@@ -547,7 +549,7 @@ To upgrade the implementation of the transparent upgradeable contract, use the `
 - The artifact containing the new `Box2` implementation.
 - Other options
 
-In the options section, include the `deploymentType` and `salt` to configure deployment type and salt.
+Optionaly in the other options section include `deploymentType` and `salt` to configure deployment type and salt for deploy of the new implementation.
 
 ```
 const myContractV2 = await deployer.loadArtifact('BoxV2');
@@ -701,7 +703,7 @@ npx hardhat run SCRIPT_FILE
 
 :::
 
-In the options section, include the `deploymentType` and `salt` to configure deployment type and salt.
+Optionaly in the other options section include `deploymentType` and `salt` to configure deployment type and salt for deploy of the new implementation.
 
 ```
 const myContractV2 = await deployer.loadArtifact('contractV2');
@@ -908,6 +910,11 @@ module.exports = [
 - `--salt-impl` - specify which salt will be used in deployment of the implementation, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --salt-impl 0x42737956734178574166864921632769419836642485081335718122152413290`.
 - When utilizing the `upgrade-zksync:beacon` or `upgrade-zksync:proxy` tasks, specify the deployment type and salt using the `--deployment-type` and `--salt` arguments respectively.
 
+:::note
 Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`
+:::
 
+:::note
 The account used for deployment will be the one specified by the `deployerAccount` configuration within the `hardhat.config.ts` file. If no such configuration is present, the account with index `0` will be used.
+:::
