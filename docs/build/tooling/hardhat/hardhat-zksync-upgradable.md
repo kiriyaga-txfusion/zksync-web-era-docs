@@ -443,7 +443,7 @@ const beacon = await hre.zkUpgrades.deployBeacon(deployer.zkWallet, boxContract,
 });
 await beacon.waitForDeployment();
 
-const box = await hre.zkUpgrades.deployBeaconProxy(deployer.zkWallet, beacon, boxContract, [42], {
+const box = await hre.zkUpgrades.deployBeaconProxy(deployer.zkWallet, await beacon.getAddress(), boxContract, [42], {
   deploymentType: 'create2',
   salt: '0x6273795673417857416686492163276941983664248508133571812215241323'
 });
