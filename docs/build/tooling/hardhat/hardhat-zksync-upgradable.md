@@ -232,7 +232,7 @@ Additionaly, in the options section optionaly include the folowing arguments to 
 
 :::note
 Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
-If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`
+If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 :::
 
 ### Openzeppelin Version
@@ -453,7 +453,7 @@ await box.waitForDeployment();
 
 :::note
 Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
-If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`
+If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 :::
 
 ## Implementation addresses check
@@ -912,7 +912,7 @@ module.exports = [
 
 :::note
 Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
-If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`
+If the salt parameters are ommited, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 :::
 
 :::note
