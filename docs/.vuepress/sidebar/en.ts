@@ -128,6 +128,10 @@ export const enSidebar = sidebar({
               text: "SubQuery",
               link: "/build/tutorials/tooling-guides/subquery.md",
             },
+            {
+              text: "DipDup",
+              link: "/build/tutorials/tooling-guides/dipdup.md",
+            },
           ],
         },
         {
@@ -547,6 +551,10 @@ export const enSidebar = sidebar({
     {
       text: "Introduction",
       link: "/infra/introduction.md",
+    },
+    {
+      text: "Quickstart",
+      link: "/infra/quickstart.md",
     },
     {
       text: "Component Breakdown",
