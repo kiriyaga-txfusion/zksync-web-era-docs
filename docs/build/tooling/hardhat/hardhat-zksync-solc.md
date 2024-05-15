@@ -71,7 +71,8 @@ zksolc: {
       libraries:{}, // optional. References to non-inlinable libraries
       missingLibrariesPath: "./.zksolc-libraries-cache/missingLibraryDependencies.json", // optional. This path serves as a cache that stores all the libraries that are missing or have dependencies on other libraries. A `hardhat-zksync-deploy` plugin uses this cache later to compile and deploy the libraries, especially when the `deploy-zksync:libraries` task is executed
       isSystem: false, // optional.  Enables Yul instructions available only for zkSync system contracts and libraries
-      forceEvmla: false, // optional. Falls back to EVM legacy assembly if there is a bug with Yul
+      viaYul: false, // optional. Compile with YUL codegen
+      viaEVMAssembly: false, // Compile with EVM legacy assembly codegen.
       optimizer: {
         enabled: true, // optional. True by default
         mode: '3', // optional. 3 by default, z to optimize bytecode size
@@ -87,6 +88,13 @@ zksolc: {
 
 ```
 
+::: warning Usage of zksolc compiler version greater or equal to 1.5.0
+
+- It's necessary to set the viaYul or viaEVMAssembly flag to true at zksolc settings to specify the compiler codegen manually.
+- When viaEVMAssembly is used, compiler expect only [zkSync Era Solidity Compiler](#zksync-era-solidity-compiler).
+
+:::
+
 ::: warning
 
 - Compilers are no longer released as Docker images and its usage is no longer recommended.
@@ -98,20 +106,22 @@ zksolc: {
 - `compilerPath` (optional) is a field with the path to the `zksolc` binary. By default, the binary in `$PATH` is used.
 - `libraries` if your contract uses non-inlinable libraries as dependencies, they have to be defined here. Learn more about [compiling libraries here](./compiling-libraries.md)
 - `missingLibrariesPath` (optional) serves as a cache that stores all the libraries that are missing or have dependencies on other libraries. A `hardhat-zksync-deploy` plugin uses this cache later to compile and deploy the libraries, especially when the `deploy-zksync:libraries` task is executed. Defaults to `./.zksolc-libraries-cache/missingLibraryDependencies.json`.
-- `isSystem` - required if contracts use enables Yul instructions available only for zkSync system contracts and libraries
-- `forceEvmla` - falls back to EVM legacy assembly if there is an issue with the Yul IR compilation pipeline.
+- `isSystem` - required if contracts use enables Yul instructions available only for zkSync system contracts and libraries,
+- `viaEVMAssembly` - Compile with EVM legacy assembly codegen,
+- `viaYul` - Compile with Yul IR codegen.
 - `optimizer` - Compiler optimizations:
   - `enabled`: `true` (default) or `false`.
   - `mode`: `3` (default) recommended for most projects. Mode `z` reduces bytecode size for large projects that make heavy use of `keccak` and far calls.
   - `fallback_to_optimizing_for_size` (optional) indicates that the compiler will try to recompile with optimizer mode "z" if the bytecode is too large.
 - `metadata`: Metadata settings. If the option is omitted, the metadata hash appends by default:
   - `bytecodeHash`: Can only be `none`. It removes metadata hash from the bytecode.
+  - `useLiteralContent`: Specify whether string literals should be treated as literals or as storage pointers
 - `dockerImage` and `tag` are deprecated options used to identify the name of the compiler docker image.
 - `contractsToCompile` (optional) field is utilized to compile only the specified contracts. The contract names do not necessarily need to be written in full qualified form. The plugin will perform an include operation, attempting to match the provided contract names.
 
-::: warning forceEvmla usage
+::: warning viaEVMAssembly usage
 
-Setting the `forceEvmla` field to true can have the following negative impacts:
+Setting the `viaEVMAssembly` field to true can have the following negative impacts:
 
 - No support for recursion.
 - No support for internal function pointers.

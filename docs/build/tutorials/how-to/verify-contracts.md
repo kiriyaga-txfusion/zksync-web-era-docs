@@ -111,6 +111,12 @@ const config: HardhatUserConfig = {
 export default config;
 ```
 
+::: warning Usage of zksolc compiler version greater or equal to 1.5.0
+
+- It's necessary to set the viaYul or viaEVMAssembly flag to true at zksolc settings to specify the compiler codegen manually.
+
+:::
+
 - Feel free to assign an arbitrary zkSync Era network name utilizing the `defaultNetwork` property.
 - The `verifyURL` attribute directs to the verification endpoint specific to the zkSync network.
 - If you want to verify a smart contract in other supported block explorer you can set `verifyURL` to point to it's verification API URL. For example for [L2scan](https://zksync-era.l2scan.co) on mainnet set `verifyURL` to `https://zksync-era.l2scan.co/api/zksync_contract_verification`.

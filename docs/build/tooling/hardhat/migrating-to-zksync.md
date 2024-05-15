@@ -88,6 +88,12 @@ zksolc: {
 },
 ```
 
+::: warning Usage of zksolc compiler version greater or equal to 1.5.0
+
+- It's necessary to set the viaYul or viaEVMAssembly flag to true at zksolc settings to specify the compiler codegen manually.
+
+:::
+
 For more advanced settings, check out the [Solidity](./hardhat-zksync-solc.md) or [Vyper](./hardhat-zksync-vyper.md) plugins.
 
 ### How to configure multiple compilation targets

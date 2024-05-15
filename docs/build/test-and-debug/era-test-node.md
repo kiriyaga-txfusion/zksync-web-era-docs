@@ -377,6 +377,12 @@ module.exports = {
 };
 ```
 
+::: warning Usage of zksolc compiler version greater or equal to 1.5.0
+
+- It's necessary to set the viaYul or viaEVMAssembly flag to true at zksolc settings to specify the compiler codegen manually.
+
+:::
+
 ### Writing test scripts
 
 5. Now, create your first test! Construct a `test/main.test.ts` file with the following code:

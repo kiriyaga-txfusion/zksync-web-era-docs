@@ -101,6 +101,13 @@ const config: HardhatUserConfig = {
 export default config;
 ```
 
+::: warning Usage of zksolc compiler version greater or equal to 1.5.0
+
+- It's necessary to set the viaYul or viaEVMAssembly flag to true at zksolc settings to specify the compiler codegen manually.
+- When viaEVMAssembly is used, compiler expect only [zkSync Era Solidity Compiler](#zksync-era-solidity-compiler).
+
+:::
+
 ## Account Abstraction
 
 Each account must implement the [IAccount](../../../developer-reference/account-abstraction.md#iaccount-interface) interface. Furthermore, since we are building an account with multiple signers, we should implement [EIP1271](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/83277ff916ac4f58fec072b8f28a252c1245c2f1/contracts/interfaces/IERC1271.sol#L12).
