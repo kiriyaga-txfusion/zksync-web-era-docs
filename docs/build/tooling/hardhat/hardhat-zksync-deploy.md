@@ -188,7 +188,7 @@ const contract = await deployer.deploy("ContractName");
 :::note salt and deployment type within the deploy method
 To specify the `ContractDeployer` system contract function to be called, you need to provide the `deploymentType` parameter. If this parameter is omitted, the `create` function will be used as the default.
 
-If salt if needed provide him through the overrides parameter. If the salt is omitted, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
+If salt is needed provide value through the overrides parameter. If the salt is omitted, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
 ```typescript
 const wallet = new zk.Wallet("PRIVATE_KEY");
