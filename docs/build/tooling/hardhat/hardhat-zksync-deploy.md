@@ -576,7 +576,7 @@ module.exports = [
 ```
 
 - `--no-compile`- skip the compilation process, e.g. `hardhat deploy-zksync:contract --contract-name Contract --no-compile`.
-- `--deployment-type` - specify which deployer smart contract function will be called. Permissible values for this parameter include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`, e.g. `hardhat deploy-zksync:contract --contract-name Greeter 'Hello' --deployment-type create2`.
+- `--deployment-type` - specify which deployer smart contract function will be called. Allowed values for this parameter include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`, e.g. `hardhat deploy-zksync:contract --contract-name Greeter 'Hello' --deployment-type create2`.
 - `--salt`- salt that will be used in deployment. If the salt parameter are omitted, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`, e.g `hardhat deploy-zksync:contract --contract-name Greeter 'Hello' --salt 0x1000000000000000000000000000000000000000000000000000000000000002`.
 
 The account used for deployment will be the one specified by the `deployerAccount` configuration within the `hardhat.config.ts` file. If no such configuration is present, the account with index `0` will be used.
