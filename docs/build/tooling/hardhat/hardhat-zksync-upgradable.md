@@ -241,8 +241,8 @@ Additionally, in the options section optionally include the folowing arguments t
 );
 ```
 
-:::note
-Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+:::info
+Allowed values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
 If the salt parameters are omitted, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 :::
 
