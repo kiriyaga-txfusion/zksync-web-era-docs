@@ -451,8 +451,8 @@ const box = await hre.zkUpgrades.deployBeaconProxy(deployer.zkWallet, await beac
 await box.waitForDeployment();
 ```
 
-:::note
-Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+:::info
+Allowed values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
 If the salt parameters are omitted, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 :::
 
