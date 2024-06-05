@@ -30,6 +30,17 @@ Examples are adopted for plugin version **>=1.0.0**
 Current version of the upgradable plugin does not support the latest version of the `@openzeppelin/upgrades-core` package.
 :::
 
+:::warning @openzeppelin/contracts and @openzeppelin/contracts-upgradeable versions
+
+The plugin does not work with the latest versions (OpenZeppelin v5) due to a blocker on the `@matterlab/zksync-contracts` package. The solution is to change the development dependencies to the previous versions (OpenZeppelin v4) in your `package.json`.
+
+```
+ "@openzeppelin/contracts": "^4.9.5",
+ "@openzeppelin/contracts-upgradeable": "^4.9.5",
+```
+
+:::
+
 [@matterlabs/hardhat-zksync-upgradable](https://www.npmjs.com/package/@matterlabs/hardhat-zksync-upgradable)
 
 Add the latest version of this plugin to your project with the following command:
@@ -234,15 +245,6 @@ Additionally, in the options section optionally include the folowing arguments t
 Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
 If the salt parameters are omitted, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 :::
-
-### Openzeppelin Version
-
-The plugin does not work with the latest versions due to a blocker on the `@matterlab/zksync-contracts` package.The solution is to change the development dependencies to the previous version in your `package.json`.
-
-```
- "@openzeppelin/contracts": "^4.9.5",
- "@openzeppelin/contracts-upgradeable": "^4.9.5",
-```
 
 ### Hardhat config
 
@@ -910,11 +912,11 @@ module.exports = [
 - `--salt-impl` - specify which salt will be used in deployment of the implementation, e.g. `hardhat deploy-zksync:beacon --contract-name Greeter 'Hello' --salt-impl 0x42737956734178574166864921632769419836642485081335718122152413290`.
 - When utilizing the `upgrade-zksync:beacon` or `upgrade-zksync:proxy` tasks, specify the deployment type and salt using the `--deployment-type` and `--salt` arguments respectively.
 
-:::note
-Permissible values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
+:::info
+Allowed values for the deployment type include `create`, `create2`, `createAccount`, and `create2Account`. If this parameter is omitted, the default value will be `create`.
 If the salt parameters are omitted, the default value will be `0x0000000000000000000000000000000000000000000000000000000000000000`.
 :::
 
-:::note
+:::info
 The account used for deployment will be the one specified by the `deployerAccount` configuration within the `hardhat.config.ts` file. If no such configuration is present, the account with index `0` will be used.
 :::
