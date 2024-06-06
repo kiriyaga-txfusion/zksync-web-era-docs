@@ -32,7 +32,8 @@ Current version of the upgradable plugin does not support the latest version of 
 
 :::warning @openzeppelin/contracts and @openzeppelin/contracts-upgradeable versions
 
-The plugin does not work with the latest versions (OpenZeppelin v5) due to a blocker on the `@matterlab/zksync-contracts` package. The solution is to change the development dependencies to the previous versions (OpenZeppelin v4) in your `package.json`.
+The plugin is not yet compatible with the latest versions of OpenZeppelin (v5). In the meantime, please use the previous version (OpenZeppelin v4) by specifying it in your `package.json`.
+
 
 ```
  "@openzeppelin/contracts": "^4.9.5",
