@@ -34,7 +34,6 @@ Current version of the upgradable plugin does not support the latest version of 
 
 The plugin is not yet compatible with the latest versions of OpenZeppelin (v5). In the meantime, please use the previous version (OpenZeppelin v4) by specifying it in your `package.json`.
 
-
 ```
  "@openzeppelin/contracts": "^4.9.5",
  "@openzeppelin/contracts-upgradeable": "^4.9.5",
